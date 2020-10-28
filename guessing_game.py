@@ -16,35 +16,36 @@ def start_game():
             answer
         else:
             print("\nYour hiscore was {}! See you next time!".format(min(hiscore_list)))
+            exit()
 
     guess_attempts = 1
     random_number = random.randint(1, 10)
 
-    print(random_number)
-
     print("\nGood luck, {}!".format(name))
-    guess = int(input("\nI'm thinking of a number between 1 and 10. Can you guess it? "))
 
     while True:
-        if guess != random_number:
-            if guess < 1 or guess > 10:
-                guess = int(input("\nTRY AGAIN!\nThe number is between 1 and 10! "))
-            elif guess > random_number:
-                guess = int(input("\nWRONG!\nThe number is going to be lower! "))
-                guess_attempts += 1
-            elif guess < random_number:
-                guess = int(input("\nWRONG!\nThe number is going to be higher! "))
-                guess_attempts += 1
-        elif guess_attempts > 1:
-            print("CORRECT!\nIt only took you {} attempts to guess the right number!".format(guess_attempts))
-            hiscore_list.append(guess_attempts)
-            play_again()
-            break
+        try:
+            guess = int(input("\nI'm thinking of a number between 1 and 10. Can you guess it? "))
+        except ValueError:
+            print("\nWHOOPS!\nPlease enter a number!")
         else:
-            print("\nNice job, you guessed it on the first try!")
-            hiscore_list.append(guess_attempts)
-            play_again()
-            break
+            while guess != random_number:
+                if guess < 1 or guess > 10:
+                    guess = int(input("\nTRY AGAIN!\nThe number is between 1 and 10! "))
+                elif guess > random_number:
+                    guess = int(input("\nWRONG!\nThe number is going to be lower! "))
+                    guess_attempts += 1
+                elif guess < random_number:
+                    guess = int(input("\nWRONG!\nThe number is going to be higher! "))
+                    guess_attempts += 1
+            if guess_attempts > 1:
+                print("CORRECT!\nIt only took you {} attempts to guess the right number!".format(guess_attempts))
+                hiscore_list.append(guess_attempts)
+                play_again()
+            else:
+                print("\nNice job, you guessed it on the first try!")
+                hiscore_list.append(guess_attempts)
+                play_again()
 
 
 start_game()
