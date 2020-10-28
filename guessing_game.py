@@ -40,12 +40,10 @@ def start_game():
                     guess_attempts += 1
             if guess_attempts > 1:
                 print("CORRECT!\nIt only took you {} attempts to guess the right number!".format(guess_attempts))
-                hiscore_list.append(guess_attempts)
-                play_again()
             else:
                 print("\nNice job, you guessed it on the first try!")
-                hiscore_list.append(guess_attempts)
-                play_again()
+            hiscore_list.append(guess_attempts)
+            play_again()
 
 
 start_game()
